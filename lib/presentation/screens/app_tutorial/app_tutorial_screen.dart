@@ -11,16 +11,10 @@ class SlideInfo {
 }
 
 final slides = <SlideInfo>[
-  SlideInfo(
-      'Busca la comida',
-      'Cupidatat amet in cillum mollit nostrud ullamco anim incididunt nostrud.',
+  SlideInfo('Busca la comida', 'Cupidatat amet in cillum mollit nostrud ullamco anim incididunt nostrud.',
       'assets/images/1.png'),
-  SlideInfo(
-      'Entrega rápida',
-      'Commodo quis culpa amet reprehenderit eiusmod nulla ad ex.',
-      'assets/images/2.png'),
-  SlideInfo('Disfruta la comida',
-      'Cupidatat quis elit consectetur amet ad mollit.', 'assets/images/3.png'),
+  SlideInfo('Entrega rápida', 'Commodo quis culpa amet reprehenderit eiusmod nulla ad ex.', 'assets/images/2.png'),
+  SlideInfo('Disfruta la comida', 'Cupidatat quis elit consectetur amet ad mollit.', 'assets/images/3.png'),
 ];
 
 class AppTutorialScreen extends StatefulWidget {
@@ -58,8 +52,11 @@ class _AppTutorialScreenState extends State<AppTutorialScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    final brightness = Theme.of(context).brightness;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: brightness == Brightness.dark ? Colors.black45 : Colors.white,
       body: Stack(
         children: [
           PageView(
@@ -78,7 +75,7 @@ class _AppTutorialScreenState extends State<AppTutorialScreen> {
             top: 50,
             child: TextButton(
               onPressed: () => context.pop(),
-              child: const Text('Salir'),
+              child: Text('Salir', style: TextStyle(color: colors.secondary)),
             ),
           ),
           endReached
@@ -116,6 +113,7 @@ class _Slide extends StatelessWidget {
   Widget build(BuildContext context) {
     final titleStyle = Theme.of(context).textTheme.titleLarge;
     final captionStyle = Theme.of(context).textTheme.bodySmall;
+    final colors = Theme.of(context).colorScheme;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
@@ -126,9 +124,9 @@ class _Slide extends StatelessWidget {
           children: [
             Image(image: AssetImage(imageUrl)),
             const SizedBox(height: 20.0),
-            Text(title, style: titleStyle),
+            Text(title, style: titleStyle?.copyWith(color: colors.primary)),
             const SizedBox(height: 20.0),
-            Text(caption, style: captionStyle)
+            Text(caption, style: captionStyle?.copyWith(color: colors.primary))
           ],
         ),
       ),
