@@ -16,20 +16,23 @@ class MenuItem {
 
 const appMenuItems = <MenuItem>[
   MenuItem(
-      title: 'Counter',
-      subTitle: 'Contador de ejemplo con Riverpod',
-      link: '/counter',
-      icon: Icons.add),
+    title: 'Counter',
+    subTitle: 'Contador de ejemplo con Riverpod',
+    link: '/counter',
+    icon: Icons.add,
+  ),
   MenuItem(
-      title: 'Botones',
-      subTitle: 'Varios botones en Flutter',
-      link: '/buttons',
-      icon: Icons.smart_button_outlined),
+    title: 'Botones',
+    subTitle: 'Varios botones en Flutter',
+    link: '/buttons',
+    icon: Icons.smart_button_outlined,
+  ),
   MenuItem(
-      title: 'Tarjetas',
-      subTitle: 'Un contenedor estilizado',
-      link: '/cards',
-      icon: Icons.credit_card),
+    title: 'Tarjetas',
+    subTitle: 'Un contenedor estilizado',
+    link: '/cards',
+    icon: Icons.credit_card,
+  ),
   MenuItem(
       title: 'Progress Indicators',
       subTitle: 'Generales y controlados',
@@ -59,10 +62,15 @@ const appMenuItems = <MenuItem>[
       title: 'InfiniteScroll and Pull',
       subTitle: 'Listas infinitas y Pull to Refresh',
       link: '/infinite',
-      icon: Icons.list_alt_rounded),
+      icon: Icons.line_style_rounded),
   MenuItem(
       title: 'Cambiar tema',
       subTitle: 'Cambiar tema de la aplicación',
       link: '/theme-changer',
       icon: Icons.color_lens_outlined),
+  MenuItem(
+      title: 'ListTile Examples',
+      subTitle: 'Diferentes usos de ListTile',
+      link: '/list-tile',
+      icon: Icons.list_alt_rounded),
 ];
