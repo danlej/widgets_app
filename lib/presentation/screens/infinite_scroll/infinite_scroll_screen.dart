@@ -22,8 +22,7 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
     super.initState();
 
     scrollController.addListener(() {
-      if ((scrollController.position.pixels + 500) >=
-          scrollController.position.maxScrollExtent) {
+      if ((scrollController.position.pixels + 500) >= scrollController.position.maxScrollExtent) {
         // Load next page
         loadNextPage();
       }
@@ -70,12 +69,12 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
   }
 
   void moveScrollToBottom() {
-    if (scrollController.position.pixels + 100 <=
-        scrollController.position.maxScrollExtent) return;
+    if (scrollController.position.pixels + 100 <= scrollController.position.maxScrollExtent) {
+      return;
+    }
 
     scrollController.animateTo(scrollController.position.pixels + 120,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.fastOutSlowIn);
+        duration: const Duration(milliseconds: 300), curve: Curves.fastOutSlowIn);
   }
 
   void addFiveImages() {
@@ -104,10 +103,8 @@ class _InfiniteScrollScreenState extends State<InfiniteScrollScreen> {
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: 300,
-                  placeholder:
-                      const AssetImage('assets/images/jar-loading.gif'),
-                  image: NetworkImage(
-                      'https://picsum.photos/id/${imagesIds[index]}/500/300'));
+                  placeholder: const AssetImage('assets/images/jar-loading.gif'),
+                  image: NetworkImage('https://picsum.photos/id/${imagesIds[index]}/500/300'));
             },
           ),
         ),

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:widgets_app/presentation/widgets/circular_avatar.dart';
 
 class ListTileScreen extends StatelessWidget {
   static const String name = 'list_tile';
@@ -31,7 +32,51 @@ class _ListTileView extends StatelessWidget {
       child: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.all(5.0),
+            child: Material(
+              child: ListTile(
+                leading: const CircularAvatar(backgroundImage: 'assets/images/woman.png'),
+                title: const Text(
+                  'Madelaine Stone',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: const Row(
+                  spacing: 2,
+                  children: [
+                    Stack(children: [
+                      Icon(Icons.check, size: 20, color: Colors.blue),
+                      Positioned(right: 4, child: Icon(Icons.check, size: 20, color: Colors.blue)),
+                    ]),
+                    Icon(Icons.camera_alt_rounded, color: Colors.grey),
+                    Text(' Photo', style: TextStyle(color: Colors.grey)),
+                  ],
+                ),
+                trailing: Padding(
+                  padding: const EdgeInsets.only(top: 6),
+                  child: Column(
+                    spacing: 5,
+                    children: [
+                      Text(
+                        '11:31 PM',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.green[700]),
+                      ),
+                      Container(
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.green[700]),
+                        child: const Center(
+                          child: Text('2', style: TextStyle(fontSize: 13, color: Colors.white)),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                tileColor: Colors.white,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
             child: Material(
               color: Colors.grey[300],
               child: ListTile(
