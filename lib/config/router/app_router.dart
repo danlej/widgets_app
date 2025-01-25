@@ -65,5 +65,10 @@ final appRouter = GoRouter(
       name: ListTileScreen.name,
       builder: (context, state) => const ListTileScreen(),
     ),
+    GoRoute(
+      path: '/text-style',
+      name: TextStyleScreen.name,
+      builder: (context, state) => const TextStyleScreen(),
+    ),
   ],
 );

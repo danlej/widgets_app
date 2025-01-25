@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:widgets_app/presentation/widgets/circular_avatar.dart';
+import 'package:widgets_app/presentation/widgets/profile_avatar.dart';
 
 class ListTileScreen extends StatelessWidget {
   static const String name = 'list_tile';
@@ -35,7 +35,59 @@ class _ListTileView extends StatelessWidget {
             padding: const EdgeInsets.all(5.0),
             child: Material(
               child: ListTile(
-                leading: const CircularAvatar(backgroundImage: 'assets/images/woman.png'),
+                leading: CircleAvatar(
+                  radius: 23,
+                  backgroundColor: Colors.amber[400],
+                  child: const Text(
+                    'A',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                ),
+                title: const Row(
+                  children: [
+                    Text('America ', style: TextStyle(fontSize: 15)),
+                    Icon(
+                      Icons.people_alt,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                  ],
+                ),
+                subtitle: const Text(
+                  'Not Shared',
+                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),
+                ),
+                trailing: const Icon(Icons.share, color: Colors.black54),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Material(
+              child: ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.blue[600],
+                  child: const Icon(
+                    Icons.wifi_outlined,
+                    color: Colors.white,
+                  ),
+                ),
+                title: const Text(
+                  'Network & Internet',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: const Text(
+                  'Wi-Fi, mobile, data usage, and hotspot',
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Material(
+              child: ListTile(
+                leading: const ProfileAvatar(backgroundImage: 'assets/images/woman.png'),
                 title: const Text(
                   'Madelaine Stone',
                   style: TextStyle(fontWeight: FontWeight.bold),

@@ -73,4 +73,10 @@ const appMenuItems = <MenuItem>[
       subTitle: 'Diferentes usos de ListTile',
       link: '/list-tile',
       icon: Icons.list_alt_rounded),
+  MenuItem(
+    title: 'Estilos de textos',
+    subTitle: 'Mostrar textos en Flutter',
+    link: '/text-style',
+    icon: Icons.text_format,
+  ),
 ];

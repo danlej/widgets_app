@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CircularAvatar extends StatelessWidget {
+class ProfileAvatar extends StatelessWidget {
   final String backgroundImage;
 
-  const CircularAvatar({super.key, required this.backgroundImage});
+  const ProfileAvatar({super.key, required this.backgroundImage});
 
   @override
   Widget build(BuildContext context) {
