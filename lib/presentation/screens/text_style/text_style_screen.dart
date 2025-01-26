@@ -25,12 +25,18 @@ class _TextStyleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Column(
         spacing: 10,
         children: [
-          CardContainer(content: _TextStyleExample1(), icon: Icons.code_outlined),
-          CardContainer(content: _TextStyleExample2(), icon: Icons.code_outlined),
+          CardContainer(
+            content: const _TextStyleExample1(),
+            action: IconButton(onPressed: () {}, icon: const Icon(Icons.code_outlined)),
+          ),
+          CardContainer(
+            content: const _TextStyleExample2(),
+            action: IconButton(onPressed: () {}, icon: const Icon(Icons.code_outlined)),
+          ),
         ],
       ),
     );

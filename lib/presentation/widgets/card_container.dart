@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class CardContainer extends StatelessWidget {
   final Widget content;
-  final IconData icon;
+  final Widget action;
 
-  const CardContainer({super.key, required this.content, required this.icon});
+  const CardContainer({super.key, required this.content, required this.action});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,7 @@ class CardContainer extends StatelessWidget {
                   color: Colors.white,
                   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0)),
                 ),
-                child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(icon),
-                ),
+                child: action,
               ),
             ),
           ],
