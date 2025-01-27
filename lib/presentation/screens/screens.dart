@@ -4,6 +4,7 @@ export 'package:widgets_app/presentation/screens/buttons/buttons_screen.dart';
 export 'package:widgets_app/presentation/screens/cards/cards_screen.dart';
 export 'package:widgets_app/presentation/screens/counter/counter_screen.dart';
 export 'package:widgets_app/presentation/screens/home/home_screen.dart';
+export 'package:widgets_app/presentation/screens/image_gallery/image_gallery_screen.dart';
 export 'package:widgets_app/presentation/screens/infinite_scroll/infinite_scroll_screen.dart';
 export 'package:widgets_app/presentation/screens/list_tile/list_tile_screen.dart';
 export 'package:widgets_app/presentation/screens/progress/progress_screen.dart';

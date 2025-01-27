@@ -3,13 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:widgets_app/config/router/app_router.dart';
 import 'package:widgets_app/config/theme/app_theme.dart';
 import 'package:widgets_app/presentation/providers/theme_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-void main() {
-  runApp(
-    const ProviderScope(
-      child: MainApp(),
-    ),
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Solicita permisos en tiempo de ejecución
+  var status = await Permission.photos.request();
+  if (status.isGranted) {
+    runApp(const ProviderScope(child: MainApp()));
+  } else {
+    // Maneja el caso donde no se otorgaron los permisos
+    runApp(const NoPermissionApp());
+  }
 }
 
 class MainApp extends ConsumerWidget {
@@ -26,6 +32,21 @@ class MainApp extends ConsumerWidget {
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       theme: appTheme.getTheme(),
+    );
+  }
+}
+
+class NoPermissionApp extends StatelessWidget {
+  const NoPermissionApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('No se otorgaron los permisos necesarios'),
+        ),
+      ),
     );
   }
 }

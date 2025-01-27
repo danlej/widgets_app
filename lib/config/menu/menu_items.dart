@@ -79,4 +79,10 @@ const appMenuItems = <MenuItem>[
     link: '/text-style',
     icon: Icons.text_format,
   ),
+  MenuItem(
+    title: 'Image Gallery',
+    subTitle: 'Galería de imágenes usando distintos métodos de carga',
+    link: '/image-gallery',
+    icon: Icons.image,
+  ),
 ];
