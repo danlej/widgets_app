@@ -1,28 +1,30 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:widgets_app/infrastructure/services/image_loader/iloader.dart';
+import 'package:widgets_app/infrastructure/services/image_loader/image_loading_strategy.dart';
 
-class ImageFileStrategy extends ILoader {
+class ImageFileStrategy implements ImageLoadingStrategy {
   @override
-  Image loadImage(String path) {
-    return Image.file(
-      File(path),
-      fit: BoxFit.cover,
-      frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-        if (wasSynchronouslyLoaded) return child;
+  Future<Image> loadImage(String path) {
+    return Future.value(
+      Image.file(
+        File(path),
+        fit: BoxFit.cover,
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+          if (wasSynchronouslyLoaded) return child;
 
-        return frame == null
-            ? const Center(
-                child: CircularProgressIndicator(strokeWidth: 2),
-              )
-            : child;
-      },
-      errorBuilder: (context, error, stackTrace) {
-        return Image.asset(
-          'assets/images/no_image_available.jpg',
-        );
-      },
+          return frame == null
+              ? const Center(
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : child;
+        },
+        errorBuilder: (context, error, stackTrace) {
+          return Image.asset(
+            'assets/images/no_image_available.jpg',
+          );
+        },
+      ),
     );
   }
 }

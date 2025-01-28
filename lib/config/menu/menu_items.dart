@@ -81,7 +81,7 @@ const appMenuItems = <MenuItem>[
   ),
   MenuItem(
     title: 'Image Gallery',
-    subTitle: 'Galería de imágenes usando distintos métodos de carga',
+    subTitle: 'Galería que implementa Strategy Pattern para carga de imágenes',
     link: '/image-gallery',
     icon: Icons.image,
   ),

@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:widgets_app/infrastructure/services/image_loader/iloader.dart';
+import 'package:widgets_app/infrastructure/services/image_loader/image_loading_strategy.dart';
 import 'package:widgets_app/infrastructure/services/image_loader/strategy.dart';
 
 class ImageLoader {
-  ILoader loader;
+  ImageLoadingStrategy imageLoadingStrategy;
 
-  ImageLoader() : loader = ImageAssetStrategy();
+  ImageLoader() : imageLoadingStrategy = ImageAssetStrategy();
 
-  Image loadImage(String path, Behavior behavior) {
+  Future<Image> loadImage(String path, Behavior behavior) {
     switch (behavior) {
       case Behavior.imageAssetStrategy:
-        loader = ImageAssetStrategy();
+        imageLoadingStrategy = ImageAssetStrategy();
         break;
       case Behavior.imageNetworkStrategy:
-        loader = ImageNetworkStrategy();
+        imageLoadingStrategy = ImageNetworkStrategy();
         break;
       case Behavior.imageFileStrategy:
-        loader = ImageFileStrategy();
+        imageLoadingStrategy = ImageFileStrategy();
         break;
       case Behavior.imageMemoryStrategy:
-        loader = ImageMemoryStrategy();
+        imageLoadingStrategy = ImageMemoryStrategy();
         break;
     }
 
-    return loader.loadImage(path);
+    return imageLoadingStrategy.loadImage(path);
   }
 }
 
