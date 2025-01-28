@@ -3,18 +3,39 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:widgets_app/infrastructure/services/image_loader/image_loader.dart';
+import 'package:widgets_app/infrastructure/services/image_loader/strategy.dart';
 
-final images = <String>[
-  'assets/images/garage.jpg',
-  'https://images.pexels.com/photos/25810976/pexels-photo-25810976/free-photo-of-healthy-breakfast-with-beverages.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-  '/storage/emulated/0/Download/flowers-and-te.jpg',
-  'assets/images/quebec-city.jpg',
+final List<Map<String, String>> images = [
+  {
+    'type': 'asset',
+    'source': 'assets/images/garage.jpg',
+  },
+  {
+    'type': 'network',
+    'source':
+        'https://images.pexels.com/photos/25810976/pexels-photo-25810976/free-photo-of-healthy-breakfast-with-beverages.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
+  },
+  {
+    'type': 'file',
+    'source': '/storage/emulated/0/Download/flowers-and-te.jpg',
+  },
+  {
+    'type': 'memory',
+    'source': 'assets/images/quebec-city.jpg',
+  },
 ];
 
 class ImageGalleryScreen extends StatelessWidget {
+  final ImageLoader _imageLoader = ImageLoader();
+
   static const String name = 'image-gallery';
 
-  const ImageGalleryScreen({super.key});
+  ImageGalleryScreen({super.key}) {
+    _imageLoader.registerStrategy('asset', AssetImageStrategy());
+    _imageLoader.registerStrategy('network', NetworkImageStrategy());
+    _imageLoader.registerStrategy('file', FileImageStrategy());
+    _imageLoader.registerStrategy('memory', MemoryImageStrategy());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +49,26 @@ class ImageGalleryScreen extends StatelessWidget {
         mainAxisSpacing: 10,
         padding: const EdgeInsets.all(10),
         children: [
-          ImageViewer(imagePath: images[0], behavior: Behavior.imageAssetStrategy),
-          ImageViewer(imagePath: images[1], behavior: Behavior.imageNetworkStrategy),
-          ImageViewer(imagePath: images[2], behavior: Behavior.imageFileStrategy),
-          ImageViewer(imagePath: images[3], behavior: Behavior.imageMemoryStrategy),
+          ImageViewer(
+            imageLoader: _imageLoader,
+            strategy: images[0]['type']!,
+            source: images[0]['source']!,
+          ),
+          ImageViewer(
+            imageLoader: _imageLoader,
+            strategy: images[1]['type']!,
+            source: images[1]['source']!,
+          ),
+          ImageViewer(
+            imageLoader: _imageLoader,
+            strategy: images[2]['type']!,
+            source: images[2]['source']!,
+          ),
+          ImageViewer(
+            imageLoader: _imageLoader,
+            strategy: images[3]['type']!,
+            source: images[3]['source']!,
+          ),
         ],
       ),
     );
@@ -39,21 +76,21 @@ class ImageGalleryScreen extends StatelessWidget {
 }
 
 class ImageViewer extends StatelessWidget {
-  final String imagePath;
-  final Behavior behavior;
+  final ImageLoader imageLoader;
+  final String strategy;
+  final String source;
 
   const ImageViewer({
     super.key,
-    required this.imagePath,
-    required this.behavior,
+    required this.imageLoader,
+    required this.strategy,
+    required this.source,
   });
 
   @override
   Widget build(BuildContext context) {
-    final ImageLoader imageLoader = ImageLoader();
-
     return FutureBuilder(
-      future: imageLoader.loadImage(imagePath, behavior),
+      future: imageLoader.loadImage(strategy, source),
       builder: (context, snapshot) {
         if (!snapshot.hasData || snapshot.hasError) return Image.asset('assets/images/no_image_available.jpg');
 

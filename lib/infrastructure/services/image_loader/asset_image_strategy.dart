@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:widgets_app/infrastructure/services/image_loader/image_loading_strategy.dart';
 
-class ImageNetworkStrategy implements ImageLoadingStrategy {
+class AssetImageStrategy implements ImageLoadingStrategy {
   @override
   Future<Image> loadImage(String path) {
     return Future.value(
-      Image.network(
+      Image.asset(
         path,
         fit: BoxFit.cover,
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {

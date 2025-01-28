@@ -73,7 +73,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/image-gallery',
       name: ImageGalleryScreen.name,
-      builder: (context, state) => const ImageGalleryScreen(),
+      builder: (context, state) => ImageGalleryScreen(),
     ),
   ],
 );

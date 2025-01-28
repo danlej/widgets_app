@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:widgets_app/infrastructure/services/image_loader/image_loading_strategy.dart';
 
-class ImageFileStrategy implements ImageLoadingStrategy {
+class FileImageStrategy implements ImageLoadingStrategy {
   @override
   Future<Image> loadImage(String path) {
     return Future.value(

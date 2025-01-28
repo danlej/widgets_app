@@ -1,4 +1,4 @@
-export 'image_asset_strategy.dart';
-export 'image_file_strategy.dart';
-export 'image_memory_strategy.dart';
-export 'image_network_strategy.dart';
+export 'asset_image_strategy.dart';
+export 'file_image_strategy.dart';
+export 'memory_image_strategy.dart';
+export 'network_image_strategy.dart';

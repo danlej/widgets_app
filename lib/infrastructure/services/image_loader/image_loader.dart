@@ -1,35 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:widgets_app/infrastructure/services/image_loader/image_loading_strategy.dart';
-import 'package:widgets_app/infrastructure/services/image_loader/strategy.dart';
 
 class ImageLoader {
-  ImageLoadingStrategy imageLoadingStrategy;
+  //ImageLoadingStrategy imageLoadingStrategy;
+  final Map<String, ImageLoadingStrategy> _strategies = {};
 
-  ImageLoader() : imageLoadingStrategy = ImageAssetStrategy();
+  void registerStrategy(String key, ImageLoadingStrategy strategy) {
+    _strategies[key] = strategy;
+  }
 
-  Future<Image> loadImage(String path, Behavior behavior) {
-    switch (behavior) {
-      case Behavior.imageAssetStrategy:
-        imageLoadingStrategy = ImageAssetStrategy();
-        break;
-      case Behavior.imageNetworkStrategy:
-        imageLoadingStrategy = ImageNetworkStrategy();
-        break;
-      case Behavior.imageFileStrategy:
-        imageLoadingStrategy = ImageFileStrategy();
-        break;
-      case Behavior.imageMemoryStrategy:
-        imageLoadingStrategy = ImageMemoryStrategy();
-        break;
+  Future<Image> loadImage(String key, String path) {
+    final strategy = _strategies[key];
+
+    if (strategy == null) {
+      return throw Exception('Estrategia no registrada para la clave: $key');
     }
 
-    return imageLoadingStrategy.loadImage(path);
+    return strategy.loadImage(path);
   }
 }
 
-enum Behavior {
-  imageAssetStrategy,
-  imageNetworkStrategy,
-  imageFileStrategy,
-  imageMemoryStrategy,
-}
+// enum KeyStrategy {
+//   asset,
+//   network,
+//   file,
+//   memory,
+// }

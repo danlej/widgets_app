@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:widgets_app/infrastructure/services/image_loader/image_loading_strategy.dart';
 
-class ImageAssetStrategy implements ImageLoadingStrategy {
+class MemoryImageStrategy implements ImageLoadingStrategy {
   @override
-  Future<Image> loadImage(String path) {
-    return Future.value(
-      Image.asset(
-        path,
+  Future<Image> loadImage(String path) async {
+    try {
+      ByteData byteData = await rootBundle.load(path);
+
+      Uint8List rawImage = byteData.buffer.asUint8List();
+
+      return Image.memory(
+        rawImage,
         fit: BoxFit.cover,
         frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
           if (wasSynchronouslyLoaded) return child;
@@ -17,12 +22,9 @@ class ImageAssetStrategy implements ImageLoadingStrategy {
                 )
               : child;
         },
-        errorBuilder: (context, error, stackTrace) {
-          return Image.asset(
-            'assets/images/no_image_available.jpg',
-          );
-        },
-      ),
-    );
+      );
+    } catch (e) {
+      return Image.asset('assets/images/no_image_available.jpg');
+    }
   }
 }
